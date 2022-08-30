@@ -1,15 +1,9 @@
 ﻿ModuleBookmarks0=
 ModuleBookmarks1=
-ModuleBookmarks2=
-ModuleBookmarks3=
 ModuleBreakpoints0=
 ModuleBreakpoints1=
-ModuleBreakpoints2=
-ModuleBreakpoints3=
 ModuleClosedNodes0=
 ModuleClosedNodes1=
-ModuleClosedNodes2=
-ModuleClosedNodes3=
-NavigationStack=ModulKoneksi,koneksi,11,6,Main,Process_Globals,18,4,Profile,Activity_Create,19,1,Main,Activity_Pause,43,0,Main,Activity_Create,33,6,Main,Globals,30,6,Main,Activity_Resume,40,0,Main,enkripsi,94,6,Visual Designer,LoginPage.bal,-100,6,Main,Masuk_Click,65,6
+NavigationStack=Main,Process_Globals,18,4,Main,Activity_Pause,43,0,Main,Globals,30,6,Main,Activity_Resume,40,0,Main,enkripsi,94,6,Visual Designer,LoginPage.bal,-100,6,Main,Activity_Create,35,6,Main,Masuk_Click,54,6
 SelectedBuild=0
-VisibleModules=1,2
+VisibleModules=
