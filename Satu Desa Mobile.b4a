@@ -1,0 +1,137 @@
+﻿Build1=Default,b4a.example
+File1=IconBaruSatuDesa.png
+File10=Tracking.png
+File2=ImageTextSatuDesa.png
+File3=LoginPage.bal
+File4=LogoBaruSatuDesa.png
+File5=logout.png
+File6=Pengajuan.png
+File7=Persyaratan.png
+File8=Profile.bal
+File9=Profile.png
+FileGroup1=Images
+FileGroup10=Images
+FileGroup2=Images
+FileGroup3=Layouts
+FileGroup4=Images
+FileGroup5=Images
+FileGroup6=Images
+FileGroup7=Images
+FileGroup8=Layouts
+FileGroup9=Images
+Group=Default Group
+Library1=byteconverter
+Library2=core
+Library3=dialogs
+Library4=encryption
+Library5=mysql
+Library6=stringfunctions
+Library7=stringutils
+Library8=xui
+ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="30"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
+Module1=|relative|..\ModulKoneksi
+Module2=|relative|..\Profile
+Module3=Starter
+NumberOfFiles=10
+NumberOfLibraries=8
+NumberOfModules=3
+Version=11.8
+@EndOfDesignText@
+#Region  Project Attributes 
+	#ApplicationLabel: Satu Desa Mobile
+	#VersionCode: 1
+	#VersionName: 
+	'SupportedOrientations possible values: unspecified, landscape or portrait.
+	#SupportedOrientations: portrait
+	#CanInstallToExternalStorage: False
+#End Region
+
+#Region  Activity Attributes 
+	#FullScreen: False
+	#IncludeTitle: False
+#End Region
+
+'Default Function
+Sub Process_Globals
+	'These global variables will be declared once when the application starts.
+	'These variables can be accessed from all modules.
+	Private xui As XUI
+End Sub
+
+'Default Function
+Sub Globals
+	'These global variables will be redeclared each time the activity is created.
+	Dim md As MessageDigest
+	Dim ByteCon As ByteConverter
+	Dim passwordhash() As Byte
+	Dim epass As String
+	Dim p As String
+	Private NamaPengguna As EditText
+	Private password As EditText
+End Sub
+
+'Default Function
+Sub Activity_Create(FirstTime As Boolean)
+	Activity.LoadLayout("LoginPage")
+End Sub
+
+'Default Function
+Sub Activity_Resume
+
+End Sub
+
+'Default Function
+Sub Activity_Pause (UserClosed As Boolean)
+
+End Sub
+
+'Tombol Masuk
+Private Sub Masuk_Click
+	'Cek input kosong atau tidak
+	If NamaPengguna.Text =  "" Then
+		MsgboxAsync("Masukan Nama Pengguna", "Info")	
+		Return
+	End If
+	
+	If password.Text =  "" Then
+		MsgboxAsync("Masukan Password", "Info")
+		Return
+	End If
+	'Panggil Koneksi Database
+	ModulKoneksi.koneksi
+	'ambil pass masukan ke p
+	p = password.Text
+	'panggil enkripsi
+	enkripsi
+	'cek nama pengguna
+	ModulKoneksi.ResultS = ModulKoneksi.MHandler.Query("SELECT * FROM tb_akunwarga WHERE username='"& NamaPengguna.Text &"'")
+	If ModulKoneksi.ResultS.RowCount > 0 Then
+		'Jika Ditemukan Cek Password
+		ModulKoneksi.ResultS = ModulKoneksi.MHandler.Query("SELECT * FROM tb_akunwarga WHERE username='"& NamaPengguna.Text &"' and password ='" &epass& "'")
+		If ModulKoneksi.ResultS.RowCount > 0 Then
+			'Jika Ditemukan, Tampilkan Halaman Utama
+			'Tutup Koneksi Database
+			ModulKoneksi.MHandler.Close
+			'Membuka Halaman
+			Activity.Finish
+			StartActivity(Profile)
+		Else
+			'Jika Tidak Ditemukan
+			MsgboxAsync("Password Tidak Ditemukan", "Info")
+			password.Text = ""
+			Return
+		End If
+	Else
+		'Jika Tidak Ditemukan
+		MsgboxAsync("Nama Pengguna Tidak Ditemukan","Info")
+		NamaPengguna.Text = ""
+		Return
+	End If
+	'cek password
+End Sub
+
+'Enkripsi MD5
+Sub enkripsi
+	passwordhash = md.GetMessageDigest(p.GetBytes("UTF8"),"MD5")
+	epass = ByteCon.HexFromBytes(passwordhash)
+End Sub
