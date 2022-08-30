@@ -1,0 +1,198 @@
+------------------------------------------
+1. variabel (Letakkan Process Globals)
+   menggunakan library MySQL
+------------------------------------------
+Dim NAMA_VAR_HANDLER As MysqlHandler
+Dim NAMA_VAR_RESULT As ResultSet
+
+------------------------------------------------
+2. Koneksi Database
+
+NB :
+Koneksi sebaiknya Dilakukan sebelum
+melakukan proses simpan, update, dll
+
+setelah selesai sebaiknya ditutup
+dengan : NAMA_VAR_HANDLER.Close
+-------------------------------------------------
+sub koneksi
+NAMA_VAR_HANDLER.Initialize("nmServer","nmDatabase","nmUser","nmPassword")
+		
+If NAMA_VAR_HANDLER.isConnected = False Then
+   Msgbox("Koneksi Error", "Info")
+   ExitApplication
+End If
+
+end sub
+-----------------------------------------
+3. Menampilkan isi ListView (Single Line)
+-----------------------------------------
+sub listTampil
+NAMA_LISTVIEW.Clear
+NAMA_VAR_RESULT = NAMA_VAR_HANDLER.Query("SELECT * FROM NAMA_TABEL")
+
+For i = 0 To NAMA_VAR_RESULT.RowCount - 1
+NAMA_VAR_RESULT.Position = i
+NAMA_LISTVIEW.AddSingleLine(NAMA_VAR_RESULT.GetString2("nmField"))		       
+Next
+
+end sub
+-----------------------------------------
+4. Validasi
+-----------------------------------------
+NAMA_VAR_RESULT = NAMA_VAR_HANDLER.Query("SELECT * FROM nmTabel WHERE nmfieldKunci='" & nmobject & "'")
+If NAMA_VAR_RESULT.RowCount > 0 Then
+   'statement
+End If
+
+-----------------------------------------
+5. Simpan
+-----------------------------------------
+NAMA_VAR_HANDLER.Exec("INSERT INTO nmTabel VALUES('" & nmobject & "','" & nmobject & "','" & nmobject  & "')")
+
+-----------------------------------------
+6. Update
+-----------------------------------------
+NAMA_VAR_HANDLER.Exec("UPDATE nmTabel set nmField='"& nmobject &"', nmField ='"& nmobject &"' WHERE nmFieldKunci = '" & nmobject & "'")
+
+-----------------------------------------
+7. Hapus
+-----------------------------------------
+Dim i As Int
+i=Msgbox2("Yakin Menghapus Data?","Info","Yes","","No",Null)
+If i=DialogResponse.POSITIVE Then
+   NAMA_VAR_HANDLER.Exec("DELETE FROM nmTabel where nmFieldKunci = '" & nmobject & "'")
+End If
+
+-----------------------------------------
+8. Memindah data dari listview
+-----------------------------------------
+
+NAMA_VAR_RESULT = NAMA_VAR_HANDLER.Query("SELECT * FROM nmTabel WHERE nama_Field_kunci = '" & nmobject & "'")
+For i = 0 To NAMA_VAR_RESULT.RowCount - 1
+NAMA_VAR_RESULT.Position = i
+    nmobject=NAMA_VAR_RESULT.getString2("nmField")
+    nmobject=NAMA_VAR_RESULT.getString2("nmField")
+Next
+
+-------------------------------------------
+9. No Otomatis (membutuhkan library stringfunction)
+-------------------------------------------
+sub autoKode
+
+Dim sf As StringFunctions 
+sf.Initialize             
+
+NAMA_VAR_RESULT = NAMA_VAR_HANDLER.Query("SELECT * FROM nmTabel ORDER BY nmFieldKunci DESC")
+If NAMA_VAR_RESULT.RowCount > 0 Then
+    NAMA_VAR_RESULT.Position=0
+    nmobject = sf.Right("00" & sf.Trim(sf.Val(sf.Right(NAMA_VAR_RESULT.GetString2("nmFieldKunci"), 3)) + 1), 3)
+Else
+    nmobject ="001"
+End If
+
+end sub
+
+--------------------------------------------
+10. ENKRIPSI (membutuhkan library encryption & byteconverter)
+--------------------------------------------
+
+'letakkan di Globals
+Dim md As MessageDigest
+Dim ByteCon As ByteConverter
+Dim passwordhash() As Byte
+Dim epass As String
+Dim p As String
+
+Sub enkripsi
+	
+passwordhash = md.GetMessageDigest(p.GetBytes("UTF8"),"MD5")
+epass = ByteCon.HexFromBytes(passwordhash)
+
+End Sub
+
+-------------------------------------------------
+11. Date Dialog (membutuhkan library dialog)
+-------------------------------------------------
+Dim dd As DateDialog
+Dim x As Int
+	
+dd.ShowCalendar=False
+dd.Year = DateTime.GetYear(DateTime.now)     
+dd.Month = DateTime.GetMonth(DateTime.now)         
+dd.DayOfMonth = DateTime.GetDayOfMonth(DateTime.now)     
+x = dd.Show("Masukkan Tanggal : ","", "OK", "Cancel", "", Null)
+If x=DialogResponse.POSITIVE Then
+   DateTime.DateFormat="dd-MMM-yyyy"
+   NAMA_OBJEK= DateTime.Date(dd.DateTicks)
+Else
+   NAMA_OBJEK=""	
+End If
+
+---------------------------------------------------
+12. SIMPAN GAMBAR (membutuhkan library Stringutils)
+---------------------------------------------------
+'variabel letakkan di globals
+Dim su As StringUtils 
+Dim imgstr As String
+Dim InputStream1 As InputStream
+Dim OutputStream1 As OutputStream
+Dim Buffer() As Byte
+
+Sub simpanBlob
+    
+    InputStream1 = File.OpenInput(fd.FilePath ,fd.ChosenName)
+    OutputStream1.InitializeToBytesArray(1000)
+    File.Copy2(InputStream1, OutputStream1)
+    Buffer = OutputStream1.ToBytesArray
+    imgstr=su.EncodeBase64(Buffer)
+	
+End Sub
+
+--------------------------------------------------------
+13. Baca Gambar (membutuhkan library Stringutils)
+--------------------------------------------------------
+'letakkan di globals
+Dim Bitmap1 As Bitmap
+Dim su As StringUtils
+Dim Buffer() As Byte
+Dim InputStream1 As InputStream
+
+Sub bacaBlob
+
+Buffer= su.DecodeBase64(NAMA_VAR_RESULT.GetString2("NAMA_FIELD_GAMBAR"))
+InputStream1.InitializeFromBytesArray(Buffer, 0, Buffer.Length)
+Bitmap1.Initialize2(InputStream1)
+InputStream1.Close
+	
+End Sub
+----------------------------------------------------
+14. File Dialog (membutuhkan library dialog)
+----------------------------------------------------
+
+'letakkan di Globals
+Dim fd As FileDialog
+
+Dim i As Int 
+
+fd.FilePath = File.DirRootExternal
+i=fd.Show("File Dialog", "Yes", "", "Cancel", Null)
+If i=DialogResponse.POSITIVE Then 
+  NAMA_IMAGEVIEW.Bitmap=LoadBitmap(fd.FilePath ,fd.ChosenName)
+End If
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

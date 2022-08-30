@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+    <doclet-version-NOT-library-version>1.02</doclet-version-NOT-library-version>
+    <class>
+        <name>mysql.mysqlhandler</name>
+        <shortname>MysqlHandler</shortname>
+        <owner>process</owner>
+        <permission>android.permission.INTERNET</permission>
+        <method>
+            <name>Initialize</name>
+            <comment>Open a mysql database connection.
+ IMPORTANT: this object should be declared in Sub Process_Globals
+ Example:&lt;code&gt;
+ Dim mh1 As MysqlHandler
+ mh1.Initialize("host[:port]", "dbname", "username","password")&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>host</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>dbname</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>user</name>
+                <type>java.lang.String</type>
+            </parameter>
+            <parameter>
+                <name>pass</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Close the database connection
+ Example:&lt;code&gt;
+ mh1.Close()&lt;/code&gt;</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Exec</name>
+            <comment>Execute a query statement and return then returns
+ true if there aren't any error, false in all other
+ case.
+ Example:&lt;code&gt;
+ Dim b As Boolean
+ 
+ b = mh1.Exec("INSERT INTO tablename(field1, ...) VALUES('value1', ...)")&lt;/code&gt;</comment>
+            <returntype>boolean</returntype>
+            <parameter>
+                <name>queryst</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Query</name>
+            <comment>Execute a query statement and return a resultset.
+ IMPORTANT: SQL Library is required
+ Example:&lt;code&gt;
+ Dim mh1 As MysqlHandler
+ Dim c As Cursor
+ 
+ mh1.Initialize("host", "dbname", "username", "password")
+ c = mh1.query("SELECT * FROM tablename")&lt;/code&gt;</comment>
+            <returntype>java.sql.ResultSet</returntype>
+            <parameter>
+                <name>queryst</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>main</name>
+            <comment></comment>
+            <returntype>void</returntype>
+            <parameter>
+                <name>args</name>
+                <type>java.lang.String[]</type>
+            </parameter>
+        </method>
+        <field>
+            <name>SQLError</name>
+            <comment></comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+        <field>
+            <name>isConnected</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </field>
+        <field>
+            <name>uri</name>
+            <comment></comment>
+            <returntype>java.lang.String</returntype>
+        </field>
+    </class>
+    <class>
+        <name>mysql.mysqlhandler.ResultSetWrapper</name>
+        <shortname>ResultSet</shortname>
+        <objectwrapper>java.sql.ResultSet</objectwrapper>
+        <owner>process</owner>
+        <method>
+            <name>GetInt</name>
+            <comment>Returns the value of column with the index colnum as integer.
+ The first column is 0
+ Example:&lt;code&gt;
+ Dim i,colnum As Integer
+ Dim rs As ResultSet
+ colnum = 1
+ i = rs.GetInt(colnum)&lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>colnum</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>RowCount</name>
+            <comment>Returns the number of rows in the result set</comment>
+            <returntype>int</returntype>
+        </method>
+        <method>
+            <name>ColumnCount</name>
+            <comment>Returns the number of columns in the result set</comment>
+            <returntype>int</returntype>
+        </method>
+        <method>
+            <name>Next</name>
+            <comment>Move the result set to next row</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>Close</name>
+            <comment>Close the result set</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>GetInt2</name>
+            <comment>Returns the value of column named colname as integer.
+ Example:&lt;code&gt;
+ Dim i As Integer
+ Dim colname As String
+ Dim rs As ResultSet
+ colname = "data"
+ i = rs.GetInt2(colname)&lt;/code&gt;</comment>
+            <returntype>int</returntype>
+            <parameter>
+                <name>colname</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetString</name>
+            <comment>Returns the value of column with the index colnum as string.
+ The first column is 0.
+ Example:&lt;code&gt;
+ Dim colnum As Integer
+ Dim s As String
+ Dim rs As ResultSet
+ colnum = 1
+ s = rs.GetString(colnum)&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>colnum</name>
+                <type>int</type>
+            </parameter>
+        </method>
+        <method>
+            <name>GetString2</name>
+            <comment>Returns the value of column named colname as string
+ Example:&lt;code&gt;
+ Dim s,colname As String
+ Dim rs As ResultSet
+ colname = "data"
+ s = rs.GetString2(colname)&lt;/code&gt;</comment>
+            <returntype>java.lang.String</returntype>
+            <parameter>
+                <name>colname</name>
+                <type>java.lang.String</type>
+            </parameter>
+        </method>
+        <method>
+            <name>Prev</name>
+            <comment>Move the result set to previous row</comment>
+            <returntype>void</returntype>
+        </method>
+        <method>
+            <name>IsInitialized</name>
+            <comment></comment>
+            <returntype>boolean</returntype>
+        </method>
+        <property>
+            <name>Position</name>
+            <returntype>int</returntype>
+            <parameter>
+                <name>Value</name>
+                <type>int</type>
+            </parameter>
+            <comment>Get the result set position.
+ The first row is 0.</comment>
+        </property>
+    </class>
+    <version>1.02</version>
+    <author>Fabio Pignoletto</author>
+    <dependsOn>mysql-connector-java-5.1.22-bin</dependsOn>
+</root>

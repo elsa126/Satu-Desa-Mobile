@@ -22,18 +22,15 @@ FileGroup9=Images
 Group=Default Group
 Library1=byteconverter
 Library2=core
-Library3=dialogs
-Library4=encryption
-Library5=mysql
-Library6=stringfunctions
-Library7=stringutils
-Library8=xui
+Library3=encryption
+Library4=mysql
+Library5=xui
 ManifestCode='This code will be applied to the manifest file during compilation.~\n~'You do not need to modify it in most cases.~\n~'See this link for for more information: https://www.b4x.com/forum/showthread.php?p=78136~\n~AddManifestText(~\n~<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="30"/>~\n~<supports-screens android:largeScreens="true" ~\n~    android:normalScreens="true" ~\n~    android:smallScreens="true" ~\n~    android:anyDensity="true"/>)~\n~SetApplicationAttribute(android:icon, "@drawable/icon")~\n~SetApplicationAttribute(android:label, "$LABEL$")~\n~CreateResourceFromFile(Macro, Themes.LightTheme)~\n~'End of default text.~\n~
 Module1=|relative|..\ModulKoneksi
 Module2=|relative|..\Profile
 Module3=Starter
 NumberOfFiles=10
-NumberOfLibraries=8
+NumberOfLibraries=5
 NumberOfModules=3
 Version=11.8
 @EndOfDesignText@
