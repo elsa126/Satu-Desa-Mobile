@@ -82,3 +82,27 @@ profile,process_globals,0,1,6,10
 
 
 
+trackingpengajuan,activity_create,1,0,19,28
+,listview1,modulkoneksi,results,modulkoneksi,mhandler
+,listview1,modulkoneksi,results
+,showlist,modulkoneksi,koneksi
+trackingpengajuan,showlist,0,0,38,50
+,listview1,modulkoneksi,results,modulkoneksi,mhandler
+modulkoneksi,results
+modulkoneksi,koneksi
+trackingpengajuan,activity_pause,0,0,34,36
+
+
+
+trackingpengajuan,activity_resume,0,0,30,32
+
+
+
+trackingpengajuan,globals,0,1,12,17
+
+
+
+trackingpengajuan,process_globals,0,1,6,10
+
+
+

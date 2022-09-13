@@ -11,13 +11,13 @@ import anywheresoftware.b4a.pc.Debug;
 import anywheresoftware.b4a.pc.B4XTypes.B4XClass;
 import anywheresoftware.b4a.pc.B4XTypes.DeviceClass;
 
-public class profile implements IRemote{
-	public static profile mostCurrent;
+public class trackingpengajuan implements IRemote{
+	public static trackingpengajuan mostCurrent;
 	public static RemoteObject processBA;
     public static boolean processGlobalsRun;
     public static RemoteObject myClass;
     public static RemoteObject remoteMe;
-	public profile() {
+	public trackingpengajuan() {
 		mostCurrent = this;
 	}
     public RemoteObject getRemoteMe() {
@@ -30,7 +30,7 @@ public class profile implements IRemote{
 
 	}
     static {
-        anywheresoftware.b4a.pc.RapidSub.moduleToObject.put(new B4XClass("profile"), "b4a.example.profile");
+        anywheresoftware.b4a.pc.RapidSub.moduleToObject.put(new B4XClass("trackingpengajuan"), "b4a.example.trackingpengajuan");
 	}
 
 public boolean isSingleton() {
@@ -50,16 +50,17 @@ public boolean isSingleton() {
 		_activity = (RemoteObject) args[3];
         anywheresoftware.b4a.keywords.Common.Density = (Float)args[4];
         remoteMe = (RemoteObject) args[5];
-		pcBA = new PCBA(this, profile.class);
+		pcBA = new PCBA(this, trackingpengajuan.class);
         main_subs_0.initializeProcessGlobals();
 		return pcBA;
 	}
 public static RemoteObject __c = RemoteObject.declareNull("anywheresoftware.b4a.keywords.Common");
+public static RemoteObject _listview1 = RemoteObject.declareNull("anywheresoftware.b4a.objects.ListViewWrapper");
 public static b4a.example.main _main = null;
 public static b4a.example.modulkoneksi _modulkoneksi = null;
 public static b4a.example.starter _starter = null;
-public static b4a.example.trackingpengajuan _trackingpengajuan = null;
+public static b4a.example.profile _profile = null;
   public Object[] GetGlobals() {
-		return new Object[] {"Activity",profile.mostCurrent._activity,"Main",Debug.moduleToString(b4a.example.main.class),"ModulKoneksi",Debug.moduleToString(b4a.example.modulkoneksi.class),"Starter",Debug.moduleToString(b4a.example.starter.class),"TrackingPengajuan",Debug.moduleToString(b4a.example.trackingpengajuan.class)};
+		return new Object[] {"Activity",trackingpengajuan.mostCurrent._activity,"ListView1",trackingpengajuan.mostCurrent._listview1,"Main",Debug.moduleToString(b4a.example.main.class),"ModulKoneksi",Debug.moduleToString(b4a.example.modulkoneksi.class),"Profile",Debug.moduleToString(b4a.example.profile.class),"Starter",Debug.moduleToString(b4a.example.starter.class)};
 }
 }

@@ -50,7 +50,8 @@ public static RemoteObject _results = RemoteObject.declareNull("mysql.mysqlhandl
 public static b4a.example.main _main = null;
 public static b4a.example.starter _starter = null;
 public static b4a.example.profile _profile = null;
+public static b4a.example.trackingpengajuan _trackingpengajuan = null;
   public Object[] GetGlobals() {
-		return new Object[] {"Main",Debug.moduleToString(b4a.example.main.class),"MHandler",modulkoneksi._mhandler,"Profile",Debug.moduleToString(b4a.example.profile.class),"ResultS",modulkoneksi._results,"Starter",Debug.moduleToString(b4a.example.starter.class)};
+		return new Object[] {"Main",Debug.moduleToString(b4a.example.main.class),"MHandler",modulkoneksi._mhandler,"Profile",Debug.moduleToString(b4a.example.profile.class),"ResultS",modulkoneksi._results,"Starter",Debug.moduleToString(b4a.example.starter.class),"TrackingPengajuan",Debug.moduleToString(b4a.example.trackingpengajuan.class)};
 }
 }

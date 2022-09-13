@@ -8,7 +8,7 @@ public class modulkoneksi_subs_0 {
 
 public static RemoteObject  _koneksi(RemoteObject _ba) throws Exception{
 try {
-		Debug.PushSubsStack("koneksi (modulkoneksi) ","modulkoneksi",2,_ba,modulkoneksi.mostCurrent,10);
+		Debug.PushSubsStack("koneksi (modulkoneksi) ","modulkoneksi",1,_ba,modulkoneksi.mostCurrent,10);
 if (RapidSub.canDelegate("koneksi")) { return b4a.example.modulkoneksi.remoteMe.runUserSub(false, "modulkoneksi","koneksi", _ba);}
 ;
  BA.debugLineNum = 10;BA.debugLine="Sub koneksi";

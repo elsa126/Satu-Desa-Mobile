@@ -63,10 +63,11 @@ public static RemoteObject _epass = RemoteObject.createImmutable("");
 public static RemoteObject _p = RemoteObject.createImmutable("");
 public static RemoteObject _namapengguna = RemoteObject.declareNull("anywheresoftware.b4a.objects.EditTextWrapper");
 public static RemoteObject _password = RemoteObject.declareNull("anywheresoftware.b4a.objects.EditTextWrapper");
-public static b4a.example.starter _starter = null;
 public static b4a.example.modulkoneksi _modulkoneksi = null;
+public static b4a.example.starter _starter = null;
 public static b4a.example.profile _profile = null;
+public static b4a.example.trackingpengajuan _trackingpengajuan = null;
   public Object[] GetGlobals() {
-		return new Object[] {"Activity",main.mostCurrent._activity,"ByteCon",main.mostCurrent._bytecon,"epass",main.mostCurrent._epass,"md",main.mostCurrent._md,"ModulKoneksi",Debug.moduleToString(b4a.example.modulkoneksi.class),"NamaPengguna",main.mostCurrent._namapengguna,"p",main.mostCurrent._p,"password",main.mostCurrent._password,"passwordhash",main._passwordhash,"Profile",Debug.moduleToString(b4a.example.profile.class),"Starter",Debug.moduleToString(b4a.example.starter.class),"xui",main._xui};
+		return new Object[] {"Activity",main.mostCurrent._activity,"ByteCon",main.mostCurrent._bytecon,"epass",main.mostCurrent._epass,"md",main.mostCurrent._md,"ModulKoneksi",Debug.moduleToString(b4a.example.modulkoneksi.class),"NamaPengguna",main.mostCurrent._namapengguna,"p",main.mostCurrent._p,"password",main.mostCurrent._password,"passwordhash",main._passwordhash,"Profile",Debug.moduleToString(b4a.example.profile.class),"Starter",Debug.moduleToString(b4a.example.starter.class),"TrackingPengajuan",Debug.moduleToString(b4a.example.trackingpengajuan.class),"xui",main._xui};
 }
 }

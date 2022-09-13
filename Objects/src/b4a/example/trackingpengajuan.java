@@ -14,8 +14,8 @@ import anywheresoftware.b4a.B4AUncaughtException;
 import anywheresoftware.b4a.debug.*;
 import java.lang.ref.WeakReference;
 
-public class main extends Activity implements B4AActivity{
-	public static main mostCurrent;
+public class trackingpengajuan extends Activity implements B4AActivity{
+	public static trackingpengajuan mostCurrent;
 	static boolean afterFirstLayout;
 	static boolean isFirst = true;
     private static boolean processGlobalsRun = false;
@@ -34,7 +34,7 @@ public class main extends Activity implements B4AActivity{
 		super.onCreate(savedInstanceState);
         mostCurrent = this;
 		if (processBA == null) {
-			processBA = new anywheresoftware.b4a.ShellBA(this.getApplicationContext(), null, null, "b4a.example", "b4a.example.main");
+			processBA = new anywheresoftware.b4a.ShellBA(this.getApplicationContext(), null, null, "b4a.example", "b4a.example.trackingpengajuan");
 			processBA.loadHtSubs(this.getClass());
 	        float deviceScale = getApplicationContext().getResources().getDisplayMetrics().density;
 	        BALayout.setDeviceScale(deviceScale);
@@ -43,7 +43,7 @@ public class main extends Activity implements B4AActivity{
 		else if (previousOne != null) {
 			Activity p = previousOne.get();
 			if (p != null && p != this) {
-                BA.LogInfo("Killing previous instance (main).");
+                BA.LogInfo("Killing previous instance (trackingpengajuan).");
 				p.finish();
 			}
 		}
@@ -86,7 +86,7 @@ public class main extends Activity implements B4AActivity{
 	private void afterFirstLayout() {
         if (this != mostCurrent)
 			return;
-		activityBA = new BA(this, layout, processBA, "b4a.example", "b4a.example.main");
+		activityBA = new BA(this, layout, processBA, "b4a.example", "b4a.example.trackingpengajuan");
         
         processBA.sharedProcessBA.activityBA = new java.lang.ref.WeakReference<BA>(activityBA);
         anywheresoftware.b4a.objects.ViewWrapper.lastId = 0;
@@ -95,19 +95,19 @@ public class main extends Activity implements B4AActivity{
         if (BA.isShellModeRuntimeCheck(processBA)) {
 			if (isFirst)
 				processBA.raiseEvent2(null, true, "SHELL", false);
-			processBA.raiseEvent2(null, true, "CREATE", true, "b4a.example.main", processBA, activityBA, _activity, anywheresoftware.b4a.keywords.Common.Density, mostCurrent);
+			processBA.raiseEvent2(null, true, "CREATE", true, "b4a.example.trackingpengajuan", processBA, activityBA, _activity, anywheresoftware.b4a.keywords.Common.Density, mostCurrent);
 			_activity.reinitializeForShell(activityBA, "activity");
 		}
         initializeProcessGlobals();		
         initializeGlobals();
         
-        BA.LogInfo("** Activity (main) Create, isFirst = " + isFirst + " **");
+        BA.LogInfo("** Activity (trackingpengajuan) Create, isFirst = " + isFirst + " **");
         processBA.raiseEvent2(null, true, "activity_create", false, isFirst);
 		isFirst = false;
 		if (this != mostCurrent)
 			return;
         processBA.setActivityPaused(false);
-        BA.LogInfo("** Activity (main) Resume **");
+        BA.LogInfo("** Activity (trackingpengajuan) Resume **");
         processBA.raiseEvent(null, "activity_resume");
         if (android.os.Build.VERSION.SDK_INT >= 11) {
 			try {
@@ -196,7 +196,7 @@ public class main extends Activity implements B4AActivity{
 		}
 	}
     public static Class<?> getObject() {
-		return main.class;
+		return trackingpengajuan.class;
 	}
     private Boolean onKeySubExist = null;
     private Boolean onKeyUpSubExist = null;
@@ -268,9 +268,9 @@ public class main extends Activity implements B4AActivity{
 			return;
 		anywheresoftware.b4a.Msgbox.dismiss(true);
         if (!dontPause)
-            BA.LogInfo("** Activity (main) Pause, UserClosed = " + activityBA.activity.isFinishing() + " **");
+            BA.LogInfo("** Activity (trackingpengajuan) Pause, UserClosed = " + activityBA.activity.isFinishing() + " **");
         else
-            BA.LogInfo("** Activity (main) Pause event (activity is not paused). **");
+            BA.LogInfo("** Activity (trackingpengajuan) Pause event (activity is not paused). **");
         if (mostCurrent != null)
             processBA.raiseEvent2(_activity, true, "activity_pause", false, activityBA.activity.isFinishing());		
         if (!dontPause) {
@@ -307,11 +307,11 @@ public class main extends Activity implements B4AActivity{
     		this.activity = new WeakReference<Activity>(activity);
     	}
 		public void run() {
-            main mc = mostCurrent;
+            trackingpengajuan mc = mostCurrent;
 			if (mc == null || mc != activity.get())
 				return;
 			processBA.setActivityPaused(false);
-            BA.LogInfo("** Activity (main) Resume **");
+            BA.LogInfo("** Activity (trackingpengajuan) Resume **");
             if (mc != mostCurrent)
                 return;
 		    processBA.raiseEvent(mc._activity, "activity_resume", (Object[])null);
@@ -338,210 +338,94 @@ public class main extends Activity implements B4AActivity{
 
 
 public static void initializeProcessGlobals() {
-    
-    if (main.processGlobalsRun == false) {
-	    main.processGlobalsRun = true;
-		try {
-		        		
-        } catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-    }
-}
-public static boolean isAnyActivityVisible() {
-    boolean vis = false;
-vis = vis | (main.mostCurrent != null);
-vis = vis | (profile.mostCurrent != null);
-vis = vis | (trackingpengajuan.mostCurrent != null);
-return vis;}
-
-private static BA killProgramHelper(BA ba) {
-    if (ba == null)
-        return null;
-    anywheresoftware.b4a.BA.SharedProcessBA sharedProcessBA = ba.sharedProcessBA;
-    if (sharedProcessBA == null || sharedProcessBA.activityBA == null)
-        return null;
-    return sharedProcessBA.activityBA.get();
-}
-public static void killProgram() {
-     {
-            Activity __a = null;
-            if (main.previousOne != null) {
-				__a = main.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(main.mostCurrent == null ? null : main.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
+             try {
+                Class.forName(BA.applicationContext.getPackageName() + ".main").getMethod("initializeProcessGlobals").invoke(null, null);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
             }
-            if (__a != null)
-				__a.finish();}
-
-BA.applicationContext.stopService(new android.content.Intent(BA.applicationContext, starter.class));
- {
-            Activity __a = null;
-            if (profile.previousOne != null) {
-				__a = profile.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(profile.mostCurrent == null ? null : profile.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
- {
-            Activity __a = null;
-            if (trackingpengajuan.previousOne != null) {
-				__a = trackingpengajuan.previousOne.get();
-			}
-            else {
-                BA ba = killProgramHelper(trackingpengajuan.mostCurrent == null ? null : trackingpengajuan.mostCurrent.processBA);
-                if (ba != null) __a = ba.activity;
-            }
-            if (__a != null)
-				__a.finish();}
-
 }
 public anywheresoftware.b4a.keywords.Common __c = null;
-public static anywheresoftware.b4a.objects.B4XViewWrapper.XUI _xui = null;
-public anywheresoftware.b4a.agraham.encryption.CipherWrapper.MessageDigestWrapper _md = null;
-public anywheresoftware.b4a.agraham.byteconverter.ByteConverter _bytecon = null;
-public static byte[] _passwordhash = null;
-public static String _epass = "";
-public static String _p = "";
-public anywheresoftware.b4a.objects.EditTextWrapper _namapengguna = null;
-public anywheresoftware.b4a.objects.EditTextWrapper _password = null;
+public anywheresoftware.b4a.objects.ListViewWrapper _listview1 = null;
+public b4a.example.main _main = null;
 public b4a.example.modulkoneksi _modulkoneksi = null;
 public b4a.example.starter _starter = null;
 public b4a.example.profile _profile = null;
-public b4a.example.trackingpengajuan _trackingpengajuan = null;
 public static String  _activity_create(boolean _firsttime) throws Exception{
-RDebugUtils.currentModule="main";
+RDebugUtils.currentModule="trackingpengajuan";
 if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_create", false))
 	 {return ((String) Debug.delegate(mostCurrent.activityBA, "activity_create", new Object[] {_firsttime}));}
-RDebugUtils.currentLine=131072;
- //BA.debugLineNum = 131072;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
-RDebugUtils.currentLine=131073;
- //BA.debugLineNum = 131073;BA.debugLine="Activity.LoadLayout(\"LoginPage\")";
-mostCurrent._activity.LoadLayout("LoginPage",mostCurrent.activityBA);
-RDebugUtils.currentLine=131074;
- //BA.debugLineNum = 131074;BA.debugLine="End Sub";
+RDebugUtils.currentLine=1507328;
+ //BA.debugLineNum = 1507328;BA.debugLine="Sub Activity_Create(FirstTime As Boolean)";
+RDebugUtils.currentLine=1507330;
+ //BA.debugLineNum = 1507330;BA.debugLine="Activity.LoadLayout(\"TrackingPengajuan\")";
+mostCurrent._activity.LoadLayout("TrackingPengajuan",mostCurrent.activityBA);
+RDebugUtils.currentLine=1507332;
+ //BA.debugLineNum = 1507332;BA.debugLine="ShowList";
+_showlist();
+RDebugUtils.currentLine=1507334;
+ //BA.debugLineNum = 1507334;BA.debugLine="ListView1.TwoLinesLayout.Label.TextColor = Colors";
+mostCurrent._listview1.getTwoLinesLayout().Label.setTextColor(anywheresoftware.b4a.keywords.Common.Colors.Black);
+RDebugUtils.currentLine=1507335;
+ //BA.debugLineNum = 1507335;BA.debugLine="ListView1.TwoLinesLayout.Label.TextSize = 15";
+mostCurrent._listview1.getTwoLinesLayout().Label.setTextSize((float) (15));
+RDebugUtils.currentLine=1507337;
+ //BA.debugLineNum = 1507337;BA.debugLine="End Sub";
+return "";
+}
+public static String  _showlist() throws Exception{
+RDebugUtils.currentModule="trackingpengajuan";
+if (Debug.shouldDelegate(mostCurrent.activityBA, "showlist", false))
+	 {return ((String) Debug.delegate(mostCurrent.activityBA, "showlist", null));}
+int _i = 0;
+RDebugUtils.currentLine=2359296;
+ //BA.debugLineNum = 2359296;BA.debugLine="Sub ShowList";
+RDebugUtils.currentLine=2359297;
+ //BA.debugLineNum = 2359297;BA.debugLine="ModulKoneksi.koneksi";
+mostCurrent._modulkoneksi._koneksi /*String*/ (mostCurrent.activityBA);
+RDebugUtils.currentLine=2359299;
+ //BA.debugLineNum = 2359299;BA.debugLine="ListView1.Clear";
+mostCurrent._listview1.Clear();
+RDebugUtils.currentLine=2359300;
+ //BA.debugLineNum = 2359300;BA.debugLine="ModulKoneksi.ResultS = ModulKoneksi.MHandler.Quer";
+mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/  = (mysql.mysqlhandler.ResultSetWrapper) anywheresoftware.b4a.AbsObjectWrapper.ConvertToWrapper(new mysql.mysqlhandler.ResultSetWrapper(), (java.sql.ResultSet)(mostCurrent._modulkoneksi._mhandler /*mysql.mysqlhandler*/ .Query("SELECT * FROM tb_pengajuan ORDER BY id_pengajuan ASC")));
+RDebugUtils.currentLine=2359302;
+ //BA.debugLineNum = 2359302;BA.debugLine="For i = 0 To ModulKoneksi.ResultS.RowCount - 1";
+{
+final int step4 = 1;
+final int limit4 = (int) (mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/ .RowCount()-1);
+_i = (int) (0) ;
+for (;_i <= limit4 ;_i = _i + step4 ) {
+RDebugUtils.currentLine=2359303;
+ //BA.debugLineNum = 2359303;BA.debugLine="ModulKoneksi.ResultS.Position = i";
+mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/ .setPosition(_i);
+RDebugUtils.currentLine=2359304;
+ //BA.debugLineNum = 2359304;BA.debugLine="ListView1.AddTwoLines(ModulKoneksi.ResultS.GetSt";
+mostCurrent._listview1.AddTwoLines(BA.ObjectToCharSequence(mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/ .GetString2("id_pengajuan")),BA.ObjectToCharSequence(mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/ .GetString((int)(Double.parseDouble("tgl_pengajuan")))));
+ }
+};
+RDebugUtils.currentLine=2359307;
+ //BA.debugLineNum = 2359307;BA.debugLine="ModulKoneksi.MHandler.Close";
+mostCurrent._modulkoneksi._mhandler /*mysql.mysqlhandler*/ .Close();
+RDebugUtils.currentLine=2359308;
+ //BA.debugLineNum = 2359308;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_pause(boolean _userclosed) throws Exception{
-RDebugUtils.currentModule="main";
-RDebugUtils.currentLine=262144;
- //BA.debugLineNum = 262144;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
-RDebugUtils.currentLine=262146;
- //BA.debugLineNum = 262146;BA.debugLine="End Sub";
+RDebugUtils.currentModule="trackingpengajuan";
+RDebugUtils.currentLine=1638400;
+ //BA.debugLineNum = 1638400;BA.debugLine="Sub Activity_Pause (UserClosed As Boolean)";
+RDebugUtils.currentLine=1638402;
+ //BA.debugLineNum = 1638402;BA.debugLine="End Sub";
 return "";
 }
 public static String  _activity_resume() throws Exception{
-RDebugUtils.currentModule="main";
+RDebugUtils.currentModule="trackingpengajuan";
 if (Debug.shouldDelegate(mostCurrent.activityBA, "activity_resume", false))
 	 {return ((String) Debug.delegate(mostCurrent.activityBA, "activity_resume", null));}
-RDebugUtils.currentLine=196608;
- //BA.debugLineNum = 196608;BA.debugLine="Sub Activity_Resume";
-RDebugUtils.currentLine=196610;
- //BA.debugLineNum = 196610;BA.debugLine="End Sub";
-return "";
-}
-public static String  _enkripsi() throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "enkripsi", false))
-	 {return ((String) Debug.delegate(mostCurrent.activityBA, "enkripsi", null));}
-RDebugUtils.currentLine=393216;
- //BA.debugLineNum = 393216;BA.debugLine="Sub enkripsi";
-RDebugUtils.currentLine=393217;
- //BA.debugLineNum = 393217;BA.debugLine="passwordhash = md.GetMessageDigest(p.GetBytes(\"UT";
-_passwordhash = mostCurrent._md.GetMessageDigest(mostCurrent._p.getBytes("UTF8"),"MD5");
-RDebugUtils.currentLine=393218;
- //BA.debugLineNum = 393218;BA.debugLine="epass = ByteCon.HexFromBytes(passwordhash)";
-mostCurrent._epass = mostCurrent._bytecon.HexFromBytes(_passwordhash);
-RDebugUtils.currentLine=393219;
- //BA.debugLineNum = 393219;BA.debugLine="End Sub";
-return "";
-}
-public static String  _masuk_click() throws Exception{
-RDebugUtils.currentModule="main";
-if (Debug.shouldDelegate(mostCurrent.activityBA, "masuk_click", false))
-	 {return ((String) Debug.delegate(mostCurrent.activityBA, "masuk_click", null));}
-RDebugUtils.currentLine=327680;
- //BA.debugLineNum = 327680;BA.debugLine="Private Sub Masuk_Click";
-RDebugUtils.currentLine=327682;
- //BA.debugLineNum = 327682;BA.debugLine="If NamaPengguna.Text =  \"\" Then";
-if ((mostCurrent._namapengguna.getText()).equals("")) { 
-RDebugUtils.currentLine=327683;
- //BA.debugLineNum = 327683;BA.debugLine="MsgboxAsync(\"Masukan Nama Pengguna\", \"Info\")";
-anywheresoftware.b4a.keywords.Common.MsgboxAsync(BA.ObjectToCharSequence("Masukan Nama Pengguna"),BA.ObjectToCharSequence("Info"),processBA);
-RDebugUtils.currentLine=327684;
- //BA.debugLineNum = 327684;BA.debugLine="Return";
-if (true) return "";
- };
-RDebugUtils.currentLine=327687;
- //BA.debugLineNum = 327687;BA.debugLine="If password.Text =  \"\" Then";
-if ((mostCurrent._password.getText()).equals("")) { 
-RDebugUtils.currentLine=327688;
- //BA.debugLineNum = 327688;BA.debugLine="MsgboxAsync(\"Masukan Password\", \"Info\")";
-anywheresoftware.b4a.keywords.Common.MsgboxAsync(BA.ObjectToCharSequence("Masukan Password"),BA.ObjectToCharSequence("Info"),processBA);
-RDebugUtils.currentLine=327689;
- //BA.debugLineNum = 327689;BA.debugLine="Return";
-if (true) return "";
- };
-RDebugUtils.currentLine=327692;
- //BA.debugLineNum = 327692;BA.debugLine="ModulKoneksi.koneksi";
-mostCurrent._modulkoneksi._koneksi /*String*/ (mostCurrent.activityBA);
-RDebugUtils.currentLine=327694;
- //BA.debugLineNum = 327694;BA.debugLine="p = password.Text";
-mostCurrent._p = mostCurrent._password.getText();
-RDebugUtils.currentLine=327696;
- //BA.debugLineNum = 327696;BA.debugLine="enkripsi";
-_enkripsi();
-RDebugUtils.currentLine=327698;
- //BA.debugLineNum = 327698;BA.debugLine="ModulKoneksi.ResultS = ModulKoneksi.MHandler.Quer";
-mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/  = (mysql.mysqlhandler.ResultSetWrapper) anywheresoftware.b4a.AbsObjectWrapper.ConvertToWrapper(new mysql.mysqlhandler.ResultSetWrapper(), (java.sql.ResultSet)(mostCurrent._modulkoneksi._mhandler /*mysql.mysqlhandler*/ .Query("SELECT * FROM tb_akunwarga WHERE username='"+mostCurrent._namapengguna.getText()+"'")));
-RDebugUtils.currentLine=327699;
- //BA.debugLineNum = 327699;BA.debugLine="If ModulKoneksi.ResultS.RowCount > 0 Then";
-if (mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/ .RowCount()>0) { 
-RDebugUtils.currentLine=327701;
- //BA.debugLineNum = 327701;BA.debugLine="ModulKoneksi.ResultS = ModulKoneksi.MHandler.Que";
-mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/  = (mysql.mysqlhandler.ResultSetWrapper) anywheresoftware.b4a.AbsObjectWrapper.ConvertToWrapper(new mysql.mysqlhandler.ResultSetWrapper(), (java.sql.ResultSet)(mostCurrent._modulkoneksi._mhandler /*mysql.mysqlhandler*/ .Query("SELECT * FROM tb_akunwarga WHERE username='"+mostCurrent._namapengguna.getText()+"' and password ='"+mostCurrent._epass+"'")));
-RDebugUtils.currentLine=327702;
- //BA.debugLineNum = 327702;BA.debugLine="If ModulKoneksi.ResultS.RowCount > 0 Then";
-if (mostCurrent._modulkoneksi._results /*mysql.mysqlhandler.ResultSetWrapper*/ .RowCount()>0) { 
-RDebugUtils.currentLine=327705;
- //BA.debugLineNum = 327705;BA.debugLine="ModulKoneksi.MHandler.Close";
-mostCurrent._modulkoneksi._mhandler /*mysql.mysqlhandler*/ .Close();
-RDebugUtils.currentLine=327707;
- //BA.debugLineNum = 327707;BA.debugLine="Activity.Finish";
-mostCurrent._activity.Finish();
-RDebugUtils.currentLine=327708;
- //BA.debugLineNum = 327708;BA.debugLine="StartActivity(Profile)";
-anywheresoftware.b4a.keywords.Common.StartActivity(processBA,(Object)(mostCurrent._profile.getObject()));
- }else {
-RDebugUtils.currentLine=327711;
- //BA.debugLineNum = 327711;BA.debugLine="MsgboxAsync(\"Password Tidak Ditemukan\", \"Info\")";
-anywheresoftware.b4a.keywords.Common.MsgboxAsync(BA.ObjectToCharSequence("Password Tidak Ditemukan"),BA.ObjectToCharSequence("Info"),processBA);
-RDebugUtils.currentLine=327712;
- //BA.debugLineNum = 327712;BA.debugLine="password.Text = \"\"";
-mostCurrent._password.setText(BA.ObjectToCharSequence(""));
-RDebugUtils.currentLine=327713;
- //BA.debugLineNum = 327713;BA.debugLine="Return";
-if (true) return "";
- };
- }else {
-RDebugUtils.currentLine=327717;
- //BA.debugLineNum = 327717;BA.debugLine="MsgboxAsync(\"Nama Pengguna Tidak Ditemukan\",\"Inf";
-anywheresoftware.b4a.keywords.Common.MsgboxAsync(BA.ObjectToCharSequence("Nama Pengguna Tidak Ditemukan"),BA.ObjectToCharSequence("Info"),processBA);
-RDebugUtils.currentLine=327718;
- //BA.debugLineNum = 327718;BA.debugLine="NamaPengguna.Text = \"\"";
-mostCurrent._namapengguna.setText(BA.ObjectToCharSequence(""));
-RDebugUtils.currentLine=327719;
- //BA.debugLineNum = 327719;BA.debugLine="Return";
-if (true) return "";
- };
-RDebugUtils.currentLine=327722;
- //BA.debugLineNum = 327722;BA.debugLine="End Sub";
+RDebugUtils.currentLine=1572864;
+ //BA.debugLineNum = 1572864;BA.debugLine="Sub Activity_Resume";
+RDebugUtils.currentLine=1572866;
+ //BA.debugLineNum = 1572866;BA.debugLine="End Sub";
 return "";
 }
 }

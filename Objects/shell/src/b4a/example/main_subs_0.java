@@ -195,13 +195,15 @@ public static void initializeProcessGlobals() {
 	    main.processGlobalsRun = true;
 		try {
 		        main_subs_0._process_globals();
-starter_subs_0._process_globals();
 modulkoneksi_subs_0._process_globals();
+starter_subs_0._process_globals();
 profile_subs_0._process_globals();
+trackingpengajuan_subs_0._process_globals();
 main.myClass = BA.getDeviceClass ("b4a.example.main");
-starter.myClass = BA.getDeviceClass ("b4a.example.starter");
 modulkoneksi.myClass = BA.getDeviceClass ("b4a.example.modulkoneksi");
+starter.myClass = BA.getDeviceClass ("b4a.example.starter");
 profile.myClass = BA.getDeviceClass ("b4a.example.profile");
+trackingpengajuan.myClass = BA.getDeviceClass ("b4a.example.trackingpengajuan");
 		
         } catch (Exception e) {
 			throw new RuntimeException(e);

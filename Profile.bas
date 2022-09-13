@@ -1,12 +1,12 @@
 ﻿B4A=true
-Group=Apps Group
+Group=Default Group
 ModulesStructureVersion=1
 Type=Activity
 Version=11.8
 @EndOfDesignText@
 #Region  Activity Attributes 
 	#FullScreen: False
-	#IncludeTitle: False
+	#IncludeTitle: True
 #End Region
 
 Sub Process_Globals
@@ -22,7 +22,7 @@ Sub Globals
 End Sub
 
 Sub Activity_Create(FirstTime As Boolean)
-	'Do not forget to load the layout file created with the visual designer. For example:
+'Do not forget to load the layout file created with the visual designer. For example:
 	Activity.LoadLayout("Profile")
 
 End Sub
